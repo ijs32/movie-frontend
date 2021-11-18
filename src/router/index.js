@@ -1,7 +1,9 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
-import Success from "../views/Success.vue";
+import createMovie from "../views/createMovie.vue";
+import editMovie from "../views/editMovie.vue";
+import showMovie from "../views/showMovie.vue";
 
 Vue.use(VueRouter);
 
@@ -12,9 +14,19 @@ const routes = [
     component: Home,
   },
   {
-    path: "/success",
-    name: "Success",
-    component: Success,
+    path: "/createmovie",
+    name: "createMovie",
+    component: createMovie,
+  },
+  {
+    path: "/movies/:id/edit",
+    name: "editMovie",
+    component: editMovie,
+  },
+  {
+    path: "/movies/:id",
+    name: "showMovie",
+    component: showMovie,
   },
 ];
 

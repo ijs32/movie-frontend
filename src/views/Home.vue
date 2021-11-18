@@ -23,32 +23,8 @@
           <button>Close</button>
         </form>
       </dialog>
-      <button v-on:click="showMovie(movie)">More Info</button>
+      <router-link v-bind:to="`/movies/${movie.id}`">More Info</router-link>
     </div>
-    <form v-on:submit.prevent="createMovie()">
-      <h1>New Movie</h1>
-      <div>
-        <label>Title:</label>
-        <input type="text" v-model="newMovieParams.title" />
-      </div>
-      <div>
-        <label>Year:</label>
-        <input type="text" v-model="newMovieParams.year" />
-      </div>
-      <div>
-        <label>Plot:</label>
-        <input type="text" v-model="newMovieParams.plot" />
-      </div>
-      <div>
-        <label>Director:</label>
-        <input type="text" v-model="newMovieParams.director" />
-      </div>
-      <div>
-        <label>English (true or false):</label>
-        <input type="text" v-model="newMovieParams.english" />
-      </div>
-      <input type="submit" value="Create" />
-    </form>
   </div>
 </template>
 
@@ -59,7 +35,6 @@ export default {
   data: function () {
     return {
       movies: [],
-      newMovieParams: {},
       currentMovie: {},
     };
   },
@@ -73,14 +48,6 @@ export default {
         .then((response) => {
           this.movies = response.data;
           console.log("Successfully indexed movies!", this.movies);
-        })
-        .catch((error) => console.log(error.response));
-    },
-    createMovie: function () {
-      axios
-        .post("/movies", this.newMovieParams)
-        .then(() => {
-          this.$router.push("/success");
         })
         .catch((error) => console.log(error.response));
     },
@@ -98,11 +65,6 @@ export default {
         console.log("DELETED", response.data);
         this.$router.push("/success");
       });
-    },
-    showMovie: function (movie) {
-      this.currentMovie = movie;
-      console.log(movie);
-      document.querySelector("#movie-details").showModal();
     },
   },
 };
