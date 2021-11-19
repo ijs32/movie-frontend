@@ -4,6 +4,11 @@
       <router-link to="/">Home</router-link>
       |
       <router-link to="/createmovie">Create Movie</router-link>
+      |
+      <router-link to="/login">Login</router-link>
+      |
+      <router-link to="/signup">Signup</router-link>
+      <button v-on:click="logout()">Logout</button>
     </div>
     <router-view />
   </div>
@@ -31,3 +36,23 @@
   color: #42b983;
 }
 </style>
+<script>
+import axios from "axios";
+
+export default {
+  data: function () {
+    return {
+      newUserParams: { password: "", password_confirmation: "" },
+      errors: [],
+      newSessionParams: {},
+    };
+  },
+  methods: {
+    logout: function () {
+      delete axios.defaults.headers.common["Authorization"];
+      localStorage.removeItem("jwt");
+      console.log("user successfully logged out");
+    },
+  },
+};
+</script>
